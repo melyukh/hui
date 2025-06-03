@@ -1,0 +1,15 @@
+/home/dzhyarik/hui/kazinoEbeyshee/bin/Debug/net9.0/kazinoEbeyshee
+/home/dzhyarik/hui/kazinoEbeyshee/bin/Debug/net9.0/kazinoEbeyshee.deps.json
+/home/dzhyarik/hui/kazinoEbeyshee/bin/Debug/net9.0/kazinoEbeyshee.runtimeconfig.json
+/home/dzhyarik/hui/kazinoEbeyshee/bin/Debug/net9.0/kazinoEbeyshee.dll
+/home/dzhyarik/hui/kazinoEbeyshee/bin/Debug/net9.0/kazinoEbeyshee.pdb
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.GeneratedMSBuildEditorConfig.editorconfig
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.AssemblyInfoInputs.cache
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.AssemblyInfo.cs
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.csproj.CoreCompileInputs.cache
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.sourcelink.json
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.dll
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/refint/kazinoEbeyshee.dll
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.pdb
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/kazinoEbeyshee.genruntimeconfig.cache
+/home/dzhyarik/hui/kazinoEbeyshee/obj/Debug/net9.0/ref/kazinoEbeyshee.dll

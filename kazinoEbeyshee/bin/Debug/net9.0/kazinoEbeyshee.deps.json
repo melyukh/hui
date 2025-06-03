@@ -1,0 +1,43 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "kazinoEbeyshee/1.0.0": {
+        "dependencies": {
+          "Microsoft.DotNet.ILCompiler": "9.0.5",
+          "Microsoft.NET.ILLink.Tasks": "9.0.5"
+        },
+        "runtime": {
+          "kazinoEbeyshee.dll": {}
+        }
+      },
+      "Microsoft.DotNet.ILCompiler/9.0.5": {},
+      "Microsoft.NET.ILLink.Tasks/9.0.5": {}
+    }
+  },
+  "libraries": {
+    "kazinoEbeyshee/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.ILCompiler/9.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yRzONLPkv5biTFWvrMQ46YtUeUo5Z9tUY81TLLQOFp+GXfteyKbimS4qjeeApi3dvTA/1AgRFaXJcYvQa5cooQ==",
+      "path": "microsoft.dotnet.ilcompiler/9.0.5",
+      "hashPath": "microsoft.dotnet.ilcompiler.9.0.5.nupkg.sha512"
+    },
+    "Microsoft.NET.ILLink.Tasks/9.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ciLi9UDEuFUmIcCKgZ8FZRLhYLYcEnCBYaIGMpruEBKBT/M/W1N08HfUMFKkznHK+TwoOR0zDWWJdesp66HsRg==",
+      "path": "microsoft.net.illink.tasks/9.0.5",
+      "hashPath": "microsoft.net.illink.tasks.9.0.5.nupkg.sha512"
+    }
+  }
+}
