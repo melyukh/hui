@@ -24,7 +24,6 @@ class Constructor
 
         return list;
     }
-
     public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom) // по прямой, диагональ, по прямой, с перегрузкой
     {
         List<string> list = new();
@@ -36,7 +35,6 @@ class Constructor
 
         return list;
     }
-
     public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom)
     {
         List<string> list = new();
@@ -48,11 +46,9 @@ class Constructor
 
         return list;
     }
-    
     public List<string> FromCenterAndUpOrDown(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom) // две лини из центра со смещением, без перегрузки
     {
         List<string> list = new();
-
         list.Add(center[0]);
 
         if (setFlagToStartFromTheBottom)

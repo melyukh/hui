@@ -5,7 +5,7 @@ using LinesConstructor;
 class Program
 {
     static public Random r = new();
-    static public string[] elements = { "🍇", "🍉", "🍒", "🍊", "💎", "🔔", "🍀", "👑", "🍾" };
+    static public string[] elements = { "🍇", "🍉", "🍒", "🍊", "💎", "🔔", "🍀", "🍾", "👑"};
     static void Main(string[] args)
     {
         Computer computer = new Computer(); //вычислитель
@@ -54,25 +54,37 @@ class Program
             // матешка
             {
                 List<string> makeLine = new();
+                List<string> uniqueContainerOfPlayedElems = new();
+                int huetaKoroche = 0;
                 currentBet = balik.SetBet(10);
-                balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet));
-                balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet));
-                balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet));
+
+                balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+                balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+                balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
 
                 makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
                 makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
 
                 makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
                 makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
 
                 makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
                 makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+
+                if (uniqueContainerOfPlayedElems.Count() != 0) // недоделан двойной успех при выигрыше
+                {
+                    string elementPlayedByRandom = elements[r.Next(0, 8)];
+                    if (uniqueContainerOfPlayedElems.Contains(elementPlayedByRandom))
+                    {
+                        
+                    }
+                }
             } 
             // матешка
 

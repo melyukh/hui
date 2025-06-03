@@ -13,8 +13,7 @@ class Computer
         {"🍀", 2.0 },
         {"🍾", 3.0 },
     };
-
-    public double ComputeRow(in List<string> line, in double bet)
+    public double ComputeRow(in List<string> line, in double bet, ref List<string> UniqueContainerOfPlayedElems, ref int huita)
     {
         int numOfCurrent = 1;
         string element = line[0];
@@ -33,7 +32,15 @@ class Computer
                         else
                             break;
                     }
-                    return numOfCurrent >= 3 ? bet * (numOfCurrent - 2) * valueOfKoeff[element] : 0;
+                    if (numOfCurrent >= 3) // если сыграло, то: возвращаем выишрыш, получаем количество сыгравших элементов и добавляем его в контейнер с уникальными игровками на проход
+                    {
+                        if (!UniqueContainerOfPlayedElems.Contains(element)) 
+                            UniqueContainerOfPlayedElems.Add(element);
+                        huita = 2 * numOfCurrent;
+                        return bet * (numOfCurrent - 2) * valueOfKoeff[element];
+                    }
+                    else
+                        return 0;
                 }
             }
             return bet * 20.0;
@@ -48,10 +55,17 @@ class Computer
                 else
                     break;
             }
-            return numOfCurrent >= 3 ? bet * (numOfCurrent - 2) * valueOfKoeff[element] : 0;
+            if (numOfCurrent >= 3)
+            {
+                if (!UniqueContainerOfPlayedElems.Contains(element))
+                    UniqueContainerOfPlayedElems.Add(element);
+                huita = 2 * numOfCurrent;
+                return bet * (numOfCurrent - 2) * valueOfKoeff[element];
+            }
+            else
+                return 0;    
         }
     }
-
     public double ComputeRow(in List<string> line, in double bet, string elementToPlay) //перегрузка для игры по конкретному элементу(типо когда залетел двойной успех)
     {
         int numOfCurrent = 0;

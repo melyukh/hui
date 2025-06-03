@@ -12,6 +12,5 @@
   <ItemGroup>
     <Using Remove = "System.Threading.Tasks"/>
     <Using Remove = "System.Net.Http"/>
-    <Using Remove = "System.Linq"/>
   </ItemGroup>
 </Project>
