@@ -1,4 +1,5 @@
 namespace Math;
+
 class Computer
 {
     private Dictionary<string, double> valueOfKoeff = new Dictionary<string, double>()
@@ -50,4 +51,17 @@ class Computer
             return numOfCurrent >= 3 ? bet * (numOfCurrent - 2) * valueOfKoeff[element] : 0;
         }
     }
+
+    public double ComputeRow(in List<string> line, in double bet, string elementToPlay) //перегрузка для игры по конкретному элементу(типо когда залетел двойной успех)
+    {
+        int numOfCurrent = 0;
+        foreach (string element in line)
+        {
+            if (element == elementToPlay)
+                numOfCurrent++;
+            else
+                break;
+        }
+        return numOfCurrent >= 3 ? bet * (numOfCurrent - 2) * valueOfKoeff[elementToPlay] : 0;
+    } 
 }

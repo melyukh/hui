@@ -22,7 +22,7 @@ class Program
         Console.Clear();
         while (true)
         {
-            //animation
+            // анимка
             Console.ReadKey();
             Console.Clear();
 
@@ -32,9 +32,10 @@ class Program
 
             for (int frames = 1; frames <= 75; frames++)
             {
-                DisplayRow(ref firstRow);
-                DisplayRow(ref secondRow);
-                DisplayRow(ref thirdRow);
+                
+                DisplayRow(ref firstRow, 1);
+                DisplayRow(ref secondRow, 2);
+                DisplayRow(ref thirdRow, 3);
                 Thread.Sleep(50);
 
                 if (frames % 15 == 0)
@@ -50,36 +51,39 @@ class Program
                 }
             }
 
-            //mathSolution
-            List<string> makeLine = new();
-            currentBet = balik.SetBet(10);
-            balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet));
-            balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet));
-            balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet));
+            // матешка
+            {
+                List<string> makeLine = new();
+                currentBet = balik.SetBet(10);
+                balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet));
+                balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet));
 
-            makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
-            makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
 
-            makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
-            makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
 
-            makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
-            makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
-            //mathSolution
+                makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+                makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
+                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet));
+            } 
+            // матешка
 
             balik.DisplayPlayerStats();
-            //animation            
+            // анимка           
         }
     }
-    public static void DisplayRow(ref List<string> list)
+    public static void DisplayRow(ref List<string> list, int numOfRow)
     {
-        foreach(string elem in list)
+        Console.SetCursorPosition(10, 2+numOfRow);
+        foreach (string elem in list)
         {
             Console.Write(elem);
         }

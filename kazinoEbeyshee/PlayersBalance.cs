@@ -15,9 +15,9 @@ class Balance
 
     public void DisplayPlayerStats() //отображает данные игрока
     {
-        Console.SetCursorPosition(11, 0);
+        Console.SetCursorPosition(1,  8);
         Console.Write($"name: {name}");
-        Console.SetCursorPosition(11, 1);
+        Console.SetCursorPosition(18, 8);
         Console.Write($"balance: {money}");
     }
     public double SetBet() //ставка
@@ -34,7 +34,7 @@ class Balance
         return bet;
     }
 
-    public double SetBet(double bet) //тест работоспособности компьютера
+    public double SetBet(double bet) //тест работоспособности компьютера, когда доделаешь все в main-е заменить нахуй
     {
         this.money -= bet;
         return bet;
