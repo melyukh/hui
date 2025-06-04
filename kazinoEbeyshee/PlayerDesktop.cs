@@ -53,36 +53,67 @@ class Program
 
             // матешка
             {
-                List<string> makeLine = new();
-                List<string> uniqueContainerOfPlayedElems = new();
-                int huetaKoroche = 0;
+                List<string> makeLine = new(); // линия отправляемая в конструктор и передающаяся на расчеты в math
+                List<string> uniqueContainerOfPlayedElems = new(); // множество уникальных элементов сыгровки
+                Dictionary<string, int> elementAndNumPairs = new(); // содержит пару элемент -> необходимое количество замен при двойном успехе
+                
                 currentBet = balik.SetBet(10);
 
-                balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-                balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-                balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+                //ебучие расчеты в 10+ строк
+                {
+                    balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
 
-                makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-                makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+                    makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
 
-                makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-                makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
+                    makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
 
-                makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-                makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
-
+                    makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
+                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                }
                 if (uniqueContainerOfPlayedElems.Count() != 0) // двойной успех при выигрыше
                 {
                     string elementPlayedByRandom = DisplayEdging();
-                    if (uniqueContainerOfPlayedElems.Contains(elementPlayedByRandom))
+                    if (uniqueContainerOfPlayedElems.Contains(elementPlayedByRandom)) // если выпал элемент из списка
                     {
+                        int numOfElementToChange = elementAndNumPairs[elementPlayedByRandom];
+                        List<int> listToGetChangedLines = new();
 
+                        lc.ChangeLines(ref firstRow, ref secondRow, ref thirdRow, numOfElementToChange, elementPlayedByRandom);
+                        DisplayRow(ref firstRow, 1);
+                        DisplayRow(ref secondRow, 2);
+                        DisplayRow(ref thirdRow, 3);
+
+                        // опять ебливые расчеты
+                        {
+                            balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, elementPlayedByRandom));
+                            balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, elementPlayedByRandom));
+                            balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, elementPlayedByRandom));
+
+                            makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+
+                            makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+
+                            makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
+                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                        }
                     }
                 }
             }
@@ -92,9 +123,11 @@ class Program
             // анимка           
         }
     }
+
+    //функции анимации
     public static void DisplayRow(ref List<string> list, int numOfRow) // отображает движущуюся и статичную часть строки
     {
-        Console.SetCursorPosition(7, 2 + numOfRow);
+        Console.SetCursorPosition(14, 2 + numOfRow);
         foreach (string elem in list)
         {
             Console.Write(elem);
@@ -109,9 +142,9 @@ class Program
     public static void DisplayPlayerStats(Balance balik) // отображает данные пользователя
     {
         balik.ReturnPlayerStats(out string name, out double balance);
-        Console.SetCursorPosition(0, 7);
+        Console.SetCursorPosition(7, 7);
         Console.Write($"name: {name}");
-        Console.SetCursorPosition(14, 7);
+        Console.SetCursorPosition(21, 7);
         Console.Write($"balance: {balance}");
     }
 
@@ -123,7 +156,7 @@ class Program
 
         for (int i = 1; i <= 40; i++)
         {
-            Console.SetCursorPosition(3, 1);
+            Console.SetCursorPosition(10, 1);
             int checkCenter = 0;
             foreach (var item in roulette)
             {
@@ -140,14 +173,16 @@ class Program
 
                 checkCenter++;
             }
-            roulette.Enqueue(elements[r.Next(0, 8)]);
-            roulette.Dequeue();
-
+            if (i != 40)
+            {
+                roulette.Enqueue(elements[r.Next(0, 8)]);
+                roulette.Dequeue();
+            }
             Thread.Sleep(65);
         }
 
-        for (int i = 0; i < 4; i++)
-            roulette.Dequeue();
-        return roulette.Dequeue();
+        while (roulette.Count() != 5)
+            roulette.Dequeue();    
+        return roulette.Peek();
     }
 }

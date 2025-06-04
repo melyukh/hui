@@ -65,4 +65,36 @@ class Constructor
         list.Add(center[4]);
         return list;
     }
+
+    public void ChangeLines(ref List<string> firstRow, ref List<string> secondRow, ref List<string> thirdRow, int colichestvo, string itemToSwap)
+    {
+        List<string> strings = new();
+        strings.AddRange(firstRow);
+        strings.AddRange(secondRow);
+        strings.AddRange(thirdRow);
+
+        List<int> indexesThatWeCanChange = new(); // создаем список индексов которые можно поменять и меняем элементы рандомной выборкой
+        int i = 0;
+        foreach (var item in strings)
+        {
+            if (item != itemToSwap)
+                indexesThatWeCanChange.Add(i);
+
+            i++;
+        }
+
+        Random choiser = new();
+
+        while (!(indexesThatWeCanChange.Count() == 0) && colichestvo > 0)
+        {
+            i = indexesThatWeCanChange[choiser.Next(0, indexesThatWeCanChange.Count())];
+            strings[i] = itemToSwap;
+            indexesThatWeCanChange.Remove(i);
+            colichestvo--;
+        }
+        
+        firstRow = strings.GetRange(0, 5);
+        secondRow = strings.GetRange(5, 5);
+        thirdRow = strings.GetRange(10, 5);
+    }
 }

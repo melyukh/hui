@@ -13,7 +13,7 @@ class Computer
         {"🍀", 2.0 },
         {"🍾", 3.0 },
     };
-    public double ComputeRow(in List<string> line, in double bet, ref List<string> UniqueContainerOfPlayedElems, ref int huita)
+    public double ComputeRow(in List<string> line, in double bet, ref List<string> UniqueContainerOfPlayedElems, ref Dictionary<string, int> dict)
     {
         int numOfCurrent = 1;
         string element = line[0];
@@ -34,9 +34,17 @@ class Computer
                     }
                     if (numOfCurrent >= 3) // если сыграло, то: возвращаем выишрыш, получаем количество сыгравших элементов и добавляем его в контейнер с уникальными игровками на проход
                     {
-                        if (!UniqueContainerOfPlayedElems.Contains(element)) 
+                        if (!UniqueContainerOfPlayedElems.Contains(element)) //добавляем элемент в список сыгравших
                             UniqueContainerOfPlayedElems.Add(element);
-                        huita = 2 * numOfCurrent;
+
+                        if (dict.ContainsKey(element)) //добавляем в словарь сыгравший элемент чтобы потом узнать сколько символов заменять
+                        {
+                            if (numOfCurrent * 2 > dict[element])
+                                dict[element] = numOfCurrent * 2;
+                        }
+                        else
+                            dict.Add(element, numOfCurrent * 2);
+
                         return bet * (numOfCurrent - 2) * valueOfKoeff[element];
                     }
                     else
@@ -57,9 +65,17 @@ class Computer
             }
             if (numOfCurrent >= 3)
             {
-                if (!UniqueContainerOfPlayedElems.Contains(element))
+                if (!UniqueContainerOfPlayedElems.Contains(element)) //добавляем элемент в список сыгравших
                     UniqueContainerOfPlayedElems.Add(element);
-                huita = 2 * numOfCurrent;
+                
+                if (dict.ContainsKey(element)) //добавляем в словарь сыгравший элемент чтобы потом узнать сколько символов заменять
+                {
+                    if (numOfCurrent * 2 > dict[element])
+                        dict[element] = numOfCurrent * 2;
+                }
+                else
+                    dict.Add(element, numOfCurrent * 2);
+
                 return bet * (numOfCurrent - 2) * valueOfKoeff[element];
             }
             else
