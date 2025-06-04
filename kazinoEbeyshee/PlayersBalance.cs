@@ -13,12 +13,10 @@ class Balance
     public Balance() : this(0.00, "undefined")
     { }
 
-    public void DisplayPlayerStats() //отображает данные игрока
+    public void ReturnPlayerStats(out string name, out double money) //отображает данные игрока
     {
-        Console.SetCursorPosition(1,  8);
-        Console.Write($"name: {name}");
-        Console.SetCursorPosition(18, 8);
-        Console.Write($"balance: {money}");
+        name = this.name;
+        money = this.money;
     }
     public double SetBet() //ставка
     {

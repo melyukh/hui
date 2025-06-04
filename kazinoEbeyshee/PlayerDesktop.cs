@@ -5,7 +5,7 @@ using LinesConstructor;
 class Program
 {
     static public Random r = new();
-    static public string[] elements = { "🍇", "🍉", "🍒", "🍊", "💎", "🔔", "🍀", "🍾", "👑"};
+    static public string[] elements = { "🍇", "🍉", "🍒", "🍊", "💎", "🔔", "🍀", "🍾", "👑" };
     static void Main(string[] args)
     {
         Computer computer = new Computer(); //вычислитель
@@ -17,22 +17,22 @@ class Program
         List<string> firstRow = new(); //линии
         List<string> secondRow = new();
         List<string> thirdRow = new();
-        
+
         //начало игры
         Console.Clear();
+        Console.CursorVisible = false;
         while (true)
         {
-            // анимка
             Console.ReadKey();
+            // анимка
             Console.Clear();
 
             firstRow.Clear();
             secondRow.Clear();
             thirdRow.Clear();
-
             for (int frames = 1; frames <= 75; frames++)
             {
-                
+
                 DisplayRow(ref firstRow, 1);
                 DisplayRow(ref secondRow, 2);
                 DisplayRow(ref thirdRow, 3);
@@ -77,32 +77,77 @@ class Program
                 makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
                 balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref huetaKoroche));
 
-                if (uniqueContainerOfPlayedElems.Count() != 0) // недоделан двойной успех при выигрыше
+                if (uniqueContainerOfPlayedElems.Count() != 0) // двойной успех при выигрыше
                 {
-                    string elementPlayedByRandom = elements[r.Next(0, 8)];
+                    string elementPlayedByRandom = DisplayEdging();
                     if (uniqueContainerOfPlayedElems.Contains(elementPlayedByRandom))
                     {
-                        
+
                     }
                 }
-            } 
+            }
             // матешка
 
-            balik.DisplayPlayerStats();
+            DisplayPlayerStats(balik);
             // анимка           
         }
     }
-    public static void DisplayRow(ref List<string> list, int numOfRow)
+    public static void DisplayRow(ref List<string> list, int numOfRow) // отображает движущуюся и статичную часть строки
     {
-        Console.SetCursorPosition(10, 2+numOfRow);
+        Console.SetCursorPosition(7, 2 + numOfRow);
         foreach (string elem in list)
         {
             Console.Write(elem);
         }
-        for(int i = list.Count; i < 5; i++)
+        for (int i = list.Count; i < 5; i++)
         {
             Console.Write(elements[r.Next(0, 8)]);
         }
         Console.WriteLine();
+    }
+
+    public static void DisplayPlayerStats(Balance balik) // отображает данные пользователя
+    {
+        balik.ReturnPlayerStats(out string name, out double balance);
+        Console.SetCursorPosition(0, 7);
+        Console.Write($"name: {name}");
+        Console.SetCursorPosition(14, 7);
+        Console.Write($"balance: {balance}");
+    }
+
+    public static string DisplayEdging() //отображает элементы рулетки вокруг поля, также возвращает элемент который был выбран в результате
+    {
+        Queue<string> roulette = new();
+        for (int i = 1; i <= 9; i++)
+            roulette.Enqueue(elements[r.Next(0, 8)]);
+
+        for (int i = 1; i <= 40; i++)
+        {
+            Console.SetCursorPosition(3, 1);
+            int checkCenter = 0;
+            foreach (var item in roulette)
+            {
+                if (checkCenter == 4)
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.Write(item);
+                }
+                else
+                {
+                    Console.ResetColor();
+                    Console.Write(item);
+                }
+
+                checkCenter++;
+            }
+            roulette.Enqueue(elements[r.Next(0, 8)]);
+            roulette.Dequeue();
+
+            Thread.Sleep(65);
+        }
+
+        for (int i = 0; i < 4; i++)
+            roulette.Dequeue();
+        return roulette.Dequeue();
     }
 }
