@@ -61,24 +61,24 @@ class Program
 
                 //ебучие расчеты в 10+ строк
                 {
-                    balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
-                    balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
-                    balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    balik.Moneys += computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    balik.Moneys += computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
                     makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
                     makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
                     makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
                     makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
                     makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
                     makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                    balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs));
+                    balik.Moneys += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
                 }
                 if (uniqueContainerOfPlayedElems.Count() != 0) // двойной успех при выигрыше
                 {
@@ -95,24 +95,24 @@ class Program
 
                         // опять ебливые расчеты
                         {
-                            balik.ReturnNewBalance(computer.ComputeRow(firstRow, currentBet, elementPlayedByRandom));
-                            balik.ReturnNewBalance(computer.ComputeRow(secondRow, currentBet, elementPlayedByRandom));
-                            balik.ReturnNewBalance(computer.ComputeRow(thirdRow, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(firstRow, currentBet, elementPlayedByRandom);
+                            balik.Moneys += computer.ComputeRow(secondRow, currentBet, elementPlayedByRandom);
+                            balik.Moneys += computer.ComputeRow(thirdRow, currentBet, elementPlayedByRandom);
 
                             makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
                             makeLine = lc.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
 
                             makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
                             makeLine = lc.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
 
                             makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
                             makeLine = lc.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                            balik.ReturnNewBalance(computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom));
+                            balik.Moneys += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
                         }
                     }
                 }

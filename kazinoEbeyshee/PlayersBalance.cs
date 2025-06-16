@@ -38,4 +38,16 @@ class Balance
         return bet;
     }
     public void ReturnNewBalance(double money) => this.money += money; //изменение баланса в случае выигрыша
+
+    public double Moneys
+    {
+        get
+        {
+            return money;
+        }
+        set
+        {
+            money = value;
+        }
+    }
 }
