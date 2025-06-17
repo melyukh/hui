@@ -2,26 +2,20 @@ namespace PlayersBalance;
 
 class Balance
 {
-    private double money;
-    private string name;
-
-    public double Money //свойство, позволяющее работать с балансом
-    {
-        get{ return money; }
-        set{ money = value; }
-    }
+    public double Money {get; set;}
+    private string Name {get; init;}
 
     public Balance(double money, string name) //конструкторы
     {
         this.Money = money;
-        this.name = name;
+        this.Name = name;
     }
     public Balance() : this(0.00, "undefined")
     { }
 
     public void ReturnPlayerStats(out string name, out double money) //отображает данные игрока
     {
-        name = this.name;
+        name = this.Name;
         money = this.Money;
     }
     public double SetBet() //ставка
