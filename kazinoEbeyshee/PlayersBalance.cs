@@ -18,20 +18,6 @@ class Balance
         name = this.Name;
         money = this.Money;
     }
-    public double SetBet() //ставка
-    {
-        Console.Write("set your bet:");
-        double bet = Convert.ToDouble(Console.ReadLine());
-        while (bet < this.Money)
-        {
-            Console.WriteLine($"Not available. Your balanse is {this.Money}");
-            Console.Write("set your bet:");
-            bet = Convert.ToDouble(Console.ReadLine());
-        }
-        this.Money -= bet;
-        return bet;
-    }
-
     public double SetBet(double bet) //тест работоспособности компьютера, когда доделаешь все в main-е заменить нахуй
     {
         this.Money -= bet;
