@@ -87,7 +87,7 @@ class Computer
         int numOfCurrent = 0;
         foreach (string element in line)
         {
-            if (element == elementToPlay)
+            if (element == elementToPlay || element == "👑")
                 numOfCurrent++;
             else
                 break;
