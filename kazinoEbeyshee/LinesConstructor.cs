@@ -1,8 +1,8 @@
 namespace LinesConstructor;
 
-class Constructor
+static class Constructor
 {
-    public List<string> MakeDiagonal(ref List<string> top, ref List<string> center, ref List<string> bottom) // по диагонали вверх и вниз, с перегрузкой
+    static public List<string> MakeDiagonal(ref List<string> top, ref List<string> center, ref List<string> bottom) // по диагонали вверх и вниз, с перегрузкой
     {
         List<string> list = new();
         list.Add(top[0]);
@@ -13,7 +13,7 @@ class Constructor
 
         return list;
     }
-    public List<string> MakeDiagonal(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom)
+    static public List<string> MakeDiagonal(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom)
     {
         List<string> list = new();
         list.Add(bottom[0]);
@@ -24,7 +24,7 @@ class Constructor
 
         return list;
     }
-    public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom) // по прямой, диагональ, по прямой, с перегрузкой
+    static public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom) // по прямой, диагональ, по прямой, с перегрузкой
     {
         List<string> list = new();
         list.Add(top[0]);
@@ -35,7 +35,7 @@ class Constructor
 
         return list;
     }
-    public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom)
+    static public List<string> AsinasCross(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom)
     {
         List<string> list = new();
         list.Add(bottom[0]);
@@ -46,7 +46,7 @@ class Constructor
 
         return list;
     }
-    public List<string> FromCenterAndUpOrDown(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom) // две лини из центра со смещением, без перегрузки
+    static public List<string> FromCenterAndUpOrDown(ref List<string> top, ref List<string> center, ref List<string> bottom, bool setFlagToStartFromTheBottom) // две лини из центра со смещением, без перегрузки
     {
         List<string> list = new();
         list.Add(center[0]);
@@ -66,7 +66,7 @@ class Constructor
         return list;
     }
 
-    public void ChangeLines(ref List<string> firstRow, ref List<string> secondRow, ref List<string> thirdRow, int colichestvo, string itemToSwap)
+    static public void ChangeLines(ref List<string> firstRow, ref List<string> secondRow, ref List<string> thirdRow, int colichestvo, string itemToSwap)
     {
         List<string> strings = new();
         strings.AddRange(firstRow);

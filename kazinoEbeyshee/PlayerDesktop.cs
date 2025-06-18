@@ -1,16 +1,12 @@
-﻿using PlayersBalance;
-using Math;
-using LinesConstructor;
-
+﻿using PlayersBalance; 
+using LinesConstructor; // статический класс сборщика линий
+using Math; // статический класс вычислителя
 class Program
 {
     static public Random r = new();
     static public string[] elements = { "🍇", "🍉", "🍒", "🍊", "💎", "🔔", "🍀", "🍾", "👑" };
     static void Main(string[] args)
     {
-        Computer computer = new Computer(); //вычислитель
-        Constructor linesConstructor = new();
-
         Balance balik = new Balance(1000.00, "dzhyar"); // баланс и функции с ним связанные
         double currentBet = 0;
 
@@ -63,24 +59,24 @@ class Program
 
                 //ебучие расчеты в 10+ строк
                 {
-                    balik.Money += computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
-                    balik.Money += computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
-                    balik.Money += computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    balik.Money += Computer.ComputeRow(firstRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    balik.Money += Computer.ComputeRow(secondRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    balik.Money += Computer.ComputeRow(thirdRow, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
-                    makeLine = linesConstructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
-                    makeLine = linesConstructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
-                    makeLine = linesConstructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
-                    makeLine = linesConstructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
 
-                    makeLine = linesConstructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
-                    makeLine = linesConstructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                    balik.Money += computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
+                    makeLine = Constructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
+                    balik.Money += Computer.ComputeRow(makeLine, currentBet, ref uniqueContainerOfPlayedElems, ref elementAndNumPairs);
                 }
                 if (uniqueContainerOfPlayedElems.Count() != 0) // двойной успех при выигрыше
                 {
@@ -90,37 +86,36 @@ class Program
                         int numOfElementToChange = elementAndNumPairs[elementPlayedByRandom];
                         List<int> listToGetChangedLines = new();
 
-                        linesConstructor.ChangeLines(ref firstRow, ref secondRow, ref thirdRow, numOfElementToChange, elementPlayedByRandom);
+                        Constructor.ChangeLines(ref firstRow, ref secondRow, ref thirdRow, numOfElementToChange, elementPlayedByRandom);
                         DisplayRow(ref firstRow, 1);
                         DisplayRow(ref secondRow, 2);
                         DisplayRow(ref thirdRow, 3);
 
                         // опять ебливые расчеты
                         {
-                            balik.Money += computer.ComputeRow(firstRow, currentBet, elementPlayedByRandom);
-                            balik.Money += computer.ComputeRow(secondRow, currentBet, elementPlayedByRandom);
-                            balik.Money += computer.ComputeRow(thirdRow, currentBet, elementPlayedByRandom);
+                            balik.Money += Computer.ComputeRow(firstRow, currentBet, elementPlayedByRandom);
+                            balik.Money += Computer.ComputeRow(secondRow, currentBet, elementPlayedByRandom);
+                            balik.Money += Computer.ComputeRow(thirdRow, currentBet, elementPlayedByRandom);
 
-                            makeLine = linesConstructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
-                            makeLine = linesConstructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.MakeDiagonal(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
 
-                            makeLine = linesConstructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
-                            makeLine = linesConstructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.AsinasCross(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
 
-                            makeLine = linesConstructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
-                            makeLine = linesConstructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
-                            balik.Money += computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, true);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
+                            makeLine = Constructor.FromCenterAndUpOrDown(ref firstRow, ref secondRow, ref thirdRow, false);
+                            balik.Money += Computer.ComputeRow(makeLine, currentBet, elementPlayedByRandom);
                         }
                     }
                 }
             }
             // матешка
-
             DisplayPlayerStats(balik);
             // анимка           
         }

@@ -1,8 +1,8 @@
 namespace Math;
 
-class Computer
+static class Computer
 {
-    private Dictionary<string, double> valueOfKoeff = new Dictionary<string, double>()
+    static private Dictionary<string, double> valueOfKoeff = new Dictionary<string, double>()
     {
         {"🍇", 1.0 },
         {"🍉", 0.8 },
@@ -13,7 +13,7 @@ class Computer
         {"🍀", 2.0 },
         {"🍾", 3.0 },
     };
-    public double ComputeRow(in List<string> line, in double bet, ref List<string> UniqueContainerOfPlayedElems, ref Dictionary<string, int> dict)
+    static public double ComputeRow(in List<string> line, in double bet, ref List<string> UniqueContainerOfPlayedElems, ref Dictionary<string, int> dict)
     {
         int numOfCurrent = 1;
         string element = line[0];
@@ -82,7 +82,7 @@ class Computer
                 return 0;    
         }
     }
-    public double ComputeRow(in List<string> line, in double bet, string elementToPlay) //перегрузка для игры по конкретному элементу(типо когда залетел двойной успех)
+    static public double ComputeRow(in List<string> line, in double bet, string elementToPlay) //перегрузка для игры по конкретному элементу(типо когда залетел двойной успех)
     {
         int numOfCurrent = 0;
         foreach (string element in line)
